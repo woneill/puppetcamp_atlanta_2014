@@ -1,0 +1,30 @@
+--- validate_2.pp	2014-12-08 09:43:38.000000000 -0500
++++ validate_2.pp-fixed	2014-12-08 09:50:51.000000000 -0500
+@@ -3,18 +3,18 @@
+ }
+ 
+ file { '/etc/ssh/sshd_config':
+-  source => 'puppet:///modules/sshd/sshd_config',
+-  owner  => 'root',
+-  group  => 'root',
+-  mode   => '640',
+-  notify => Service['sshd'], /* sshd will restart whenever you
+-             edit this file. */
++  source  => 'puppet:///modules/sshd/sshd_config',
++  owner   => 'root',
++  group   => 'root',
++  mode    => '0640',
++  notify  => Service['sshd'], # sshd will restart whenever you
++ #              edit this file.
+   require => Package['openssh-server'],
+ }
+ 
+ service { 'sshd':
+   ensure     => running,
+-  enable     => 'true',
+-  hasstatus  => 'true',
+-  hasrestart => 'true',
++  enable     => true,
++  hasstatus  => true,
++  hasrestart => true,
+ }

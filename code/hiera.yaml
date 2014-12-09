@@ -1,0 +1,19 @@
+---
+ntp::servers:
+    - 0.us.pool.ntp.org
+    - 1.us.pool.ntp.org
+    - 2.us.pool.ntp.org
+    - 3.us.pool.ntp.org
+hp::ilo::settings:
+    ssh_status
+        type: global
+        value: true
+    ssh_port
+        type: global
+        value: '22'
+    http_port
+        type: global
+        value: '80'
+    https_port
+        type: global
+        value: '443'

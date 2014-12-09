@@ -1,0 +1,233 @@
+%section{ 'data-background' => 'images/Freddie_wink.png', 'data-background-size' => 'contain'}
+  %h1 Continuous Deployment of Puppet Modules
+  %h2 How we do it at MailChimp
+
+%section
+  %h2 Bill O'Neill
+  %h2 @woneill
+  %img{ :src => 'images/me.jpg' }
+  %aside.notes
+    Sysadmin for development groups. RH certified since RH 7. Puppet Certified since 2013. Rant about devops == sysadmins learning developer's techniques. Started off using cfengine.
+
+%section{ 'data-background' => 'images/Freddie_OG.png', 'data-background-size' => 'contain'}
+  %img{ :src => 'images/logo-white.png' }
+
+%section{ 'data-background' => 'images/Freddie_OG.png', 'data-background-size' => 'contain'}
+  %h1 Email Service Provider
+  %ul
+    %li.fragment Deliver ~500 million emails daily
+    %li.fragment 723 million emails delivered on Cyber Monday
+    %li.fragment
+      %a{ :href => 'https://www.senderscore.org/' } Sender Score
+      of 97
+    %li.fragment http://delivery.mailchimp.com/
+
+%section{ 'data-background' => 'images/Freddie_OG.png', 'data-background-size' => 'contain'}
+  %h1 History
+  %img{ :src => 'images/cows-in-server-farm.jpg' }
+  %span.attribution Image source: https://blog.engineyard.com/2014/configure-before-you-boot
+  %aside.notes
+    Started as a side project in 2001. Servers as Cattle, not pets. Managed hosting resulted in lots of cattle drives.
+
+%section{ 'data-background' => 'images/Freddie_OG.png', 'data-background-size' => 'contain'}
+  %h2 Configuration Management is Hard
+  %blockquote.fragment "With Chef, Puppet, and CFEngine we found a not-insignificant learning curve on setting up the different server daemons and learning the DSL.  This was particularly challenging when we were configuring unique software not yet given recipes by the existing community.  Given our cluster sizes, we also didn't really need any of the advanced features those systems provided."
+  %blockquote.fragment - README from internally built tool
+
+%section{ 'data-background' => 'images/Freddie_OG.png', 'data-background-size' => 'contain'}
+  %h2 Move to Colocation
+  %ul
+    %li.fragment Buy vs. Lease analogy
+    %li.fragment Grow our Operations team
+    %li.fragment Needed a tool with dry-run mode
+
+%section{ 'data-background' => 'images/thanksremy.jpg', 'data-background-size' => 'contain'}
+  %h2 People Make Mistakes
+
+%section{ 'data-background' => 'images/thanksremy.jpg', 'data-background-size' => 'contain' }
+  %h2 How do we catch these mistakes as early as possible?
+  %h2.fragment
+    %a{ :href => 'http://en.wikipedia.org/wiki/Autonomation' }
+      Autonomation
+  %blockquote.fragment "automation with a human touch"
+  %ol
+    %li.fragment Detect the abnormality
+    %li.fragment Stop
+    %li.fragment Fix or correct the immediate condition
+
+%section{ 'data-background' => 'images/thanksremy.jpg', 'data-background-size' => 'contain', 'data-transition' => 'zoom' }
+  %h2 How do we catch these mistakes as early as possible?
+  %ul
+    %li.fragment DSL tools
+    %li.fragment Editor Support
+    %li.fragment Source Code Management
+    %li.fragment Continuous Integration
+  %aside.notes
+    Each of these leverages the previous one
+
+%section
+  %h1 DSL Tools
+  %ul
+    %li.fragment Puppet
+    %li.fragment ERB
+    %li.fragment YAML
+    %li.fragment Puppet Style Guide
+
+%section
+  %h1 Puppet
+  %pre
+    %code
+      puppet parser validate mymanifest.pp
+
+%section
+  %pre
+    %code{ 'data-trim' => true, :contenteditable => true }= contents_of('code/validate_1.pp')
+
+%section
+  %pre
+    %code{ 'data-trim' => true, :contenteditable => true }= contents_of('code/validate_1.pp.bash')
+
+%section
+  %h1 ERB
+  %pre
+    %code
+      erb -P -x -T '-' mytemplate.erb | ruby -c
+
+%section
+  %pre
+    %code{ 'data-trim' => true, :contenteditable => true }= contents_of('code/broken-ntp.conf.erb.escaped')
+
+%section
+  %pre
+    %code{ 'data-trim' => true, :contenteditable => true }= contents_of('code/broken-ntp.conf.erb.bash')
+
+%section
+  %h1 YAML
+  %pre
+    %code
+      npm install -g js-yaml; js-yaml hiera.yaml
+  %pre
+    %code
+      ruby -e "require 'yaml'; YAML.load_file('hiera.yaml')"
+
+%section
+  %pre
+    %code{ 'data-trim' => true, :contenteditable => true }= contents_of('code/hiera.yaml')
+
+%section
+  %pre
+    %code{ 'data-trim' => true, :contenteditable => true }= contents_of('code/hiera.yaml.bash')
+
+%section
+  %h1 Puppet Style Guide
+  https://docs.puppetlabs.com/guides/style_guide.html
+  %pre
+    %code
+      gem install puppet-lint
+  %pre.fragment.current-visible
+    %code
+      puppet-lint /my/puppet/code
+  %pre.fragment
+    %code
+      puppet-lint --fix /my/puppet/code
+
+%section
+  %pre
+    %code{ 'data-trim' => true, :contenteditable => true }= contents_of('code/validate_2.pp')
+
+%section
+  %pre
+    %code{ 'data-trim' => true, :contenteditable => true }= contents_of('code/validate_2.pp.bash')
+
+%section
+  %pre
+    %code{ 'data-trim' => true, :contenteditable => true }= contents_of('code/validate_2.pp.bash-fixed')
+
+%section
+  %pre
+    %code{ 'data-trim' => true, :contenteditable => true }= contents_of('code/validate_2.pp-fixed')
+
+%section
+  %pre
+    %code{ 'data-trim' => true, :contenteditable => true }= contents_of('code/validate_2.pp.diff')
+
+%section
+  %h1 Editor Support
+
+%section
+  %h1 VIM
+  %h2.fragment Plugins FTW
+  %ul
+    %li.fragment
+      %a{ :href => 'https://github.com/scrooloose/syntastic'}
+        Syntastic
+    %li.fragment
+      %a{ :href => 'https://github.com/rodjek/vim-puppet'}
+        vim-puppet
+    %li.fragment
+      %a{ :href => 'https://github.com/SirVer/ultisnips'}
+        UltiSnips
+      with
+      %a{ :href => 'https://github.com/honza/vim-snippets'}
+        vim-snippets
+
+%section
+  %h1 emacs
+  http://www.emacswiki.org/emacs/PuppetProgramming
+
+%section
+  %h1 Geppetto
+  http://puppetlabs.github.io/geppetto/index.html
+
+%section
+  %h1 Source Code Management
+
+%section
+  %h1 Commit Hooks
+  %h3 Script running the DSL tools against new files
+
+%section
+  %h1 Peer Review
+  %img{ :src => 'images/review_board.png' }
+
+%section
+  %h1 Trunk Based Deployment
+  %aside.notes
+    We use a dev and prod repo, cherry-picking changesets. We use the same commit hooks in both repos.
+
+%section
+  %h1 Continuous Integration
+
+%section
+  %h1 Jenkins
+  %h2.fragment https://github.com/vStone/jenkins-puppet-scripts
+
+%section
+  %h1 Why not rspec or beaker?
+
+%section
+  %h1 Continuous Deployment
+
+%section
+  %h1
+    Remember Trunk Based Deployment?
+  %pre.fragment
+    %code{ 'data-trim' => true, :contenteditable => true }= contents_of('code/vcsrepo.pp')
+  %aside.notes
+    We use mcollective to kick this off after a successfull jenkins build. Could also use a remote ssh command
+
+%section
+  %h1 Review Time!
+  %ul
+    %li.fragment Catch mistakes early
+    %li.fragment Automation with a human touch
+    %li.fragment Trunk Based Deployments
+
+%section
+  %h1 Questions?
+
+%section
+  %h1 Thanks!
+  %h2 Bill O'Neill
+  %h2 woneill@pobox.com
+  %h2 @woneill

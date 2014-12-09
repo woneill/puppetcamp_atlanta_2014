@@ -1,0 +1,10 @@
+restrict default kod nomodify notrap nopeer<% unless @service %> noquery<% end %>
+restrict 127.0.0.1
+restrict -6 ::1
+
+driftfile /var/lib/ntp/drift
+
+<% @serverlist.sort.each do |server| -%>
+server <%= server %> iburst maxpoll 6
+restrict <%= server %> mask 255.255.255.255 nomodify notrap noquery
+<% end -%>

@@ -1,0 +1,12 @@
+$ puppet-lint --fix validate_2.pp
+FIXED: quoted boolean value found on line 16
+FIXED: quoted boolean value found on line 17
+FIXED: quoted boolean value found on line 18
+FIXED: indentation of => is not properly aligned on line 6
+FIXED: indentation of => is not properly aligned on line 7
+FIXED: indentation of => is not properly aligned on line 8
+FIXED: indentation of => is not properly aligned on line 9
+FIXED: indentation of => is not properly aligned on line 10
+FIXED: mode should be represented as a 4 digit octal value
+ or symbolic mode on line 9
+FIXED: /* */ comment found on line 10
